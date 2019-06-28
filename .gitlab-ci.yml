@@ -1,0 +1,13 @@
+image: docker
+
+docker:image:
+  services:
+    - docker:dind
+  variables:
+    PROJECT: mrchapp
+  script:
+    - docker version
+    - ./build.sh
+    - docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - docker push $PROJECT/build-base
+    - for d in arm arm64 x86; do docker push $PROJECT/build-oe-sumo_$d; done
