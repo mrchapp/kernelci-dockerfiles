@@ -1,7 +1,7 @@
 RUN apt-get update \
  && apt-get install --no-install-recommends -y file \
  && apt clean \
- && wget http://snapshots.linaro.org/openembedded/lkft/sdk/sumo/juno/latest/lkft-x86_64-aarch64-toolchain-2.5+linaro.sh \
+ && wget -q http://snapshots.linaro.org/openembedded/lkft/sdk/sumo/juno/latest/lkft-x86_64-aarch64-toolchain-2.5+linaro.sh \
  && chmod +x lkft-x86_64-aarch64-toolchain-2.5+linaro.sh \
  && ./lkft-x86_64-aarch64-toolchain-2.5+linaro.sh -y \
  && rm -v lkft-x86_64-aarch64-toolchain-2.5+linaro.sh
