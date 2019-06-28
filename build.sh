@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/bin/sh
+
+set -e
 
 PROJECT=${PROJECT:-mrchapp}
 
@@ -16,9 +18,13 @@ build_image() {
     image_from="debian:buster"
   fi
 
-  pushd "$1" >/dev/null
-  cat <(echo "FROM ${image_from}") Dockerfile.in > Dockerfile
-  popd >/dev/null
+  oldpwd=$(pwd)
+  cd "$1"
+  (
+    echo "FROM ${image_from}"
+    cat Dockerfile.in
+  ) > Dockerfile
+  cd "${oldpwd}"
 
   docker build --tag="${PROJECT}/${image_name}" "$1"
 }
